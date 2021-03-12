@@ -20,6 +20,8 @@ public class Produto {
 	
 	private boolean disponivel;
 	
+	private Estado estado; //gets e sets CTRL + 1
+	
 	//Construtores
 	public Produto(int codigo, String nome, boolean disponivel) {
 		this.codigo = codigo;
@@ -64,6 +66,14 @@ public class Produto {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 	
 	//CTRL + 3 -> ggas

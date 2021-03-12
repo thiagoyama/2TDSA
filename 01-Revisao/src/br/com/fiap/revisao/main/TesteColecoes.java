@@ -28,7 +28,7 @@ public class TesteColecoes {
 		
 		//foreach
 		for (Chocolate c : lista) {
-			System.out.println(c.getNome() + " " + c.getPeso());
+			System.out.println(c);
 		}
 		
 		//Mapa<Tipo da chave, Tipo Valor>

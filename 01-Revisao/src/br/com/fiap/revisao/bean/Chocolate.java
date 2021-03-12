@@ -1,5 +1,6 @@
 package br.com.fiap.revisao.bean;
 
+
 public class Chocolate extends Produto {
 
 	//Construtor é herdado? Não
@@ -17,6 +18,11 @@ public class Chocolate extends Produto {
 	@Override
 	public void calcularDesconto() {
 		System.out.println("Calculando desconto do chocolate...");
+	}
+	
+	@Override
+	public String toString() {
+		return "Nome: " + getNome() + " Peso: " + peso;
 	}
 	
 	public float getPeso() {
