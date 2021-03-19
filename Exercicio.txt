@@ -1,0 +1,17 @@
+No mesmo projeto:
+
+Mapear a tabela:
+
+TB_VEICULO
+--
+*cd_veiculo (PK) NUMBER
+*ds_modelo	 VARCHAR(80)
+*ds_marca	 VARCHAR(60)
+*vl_veiculo	 NUMBER
+dt_fabricacao	 DATE
+ds_combustivel	 VARCHAR -> Enum no Java
+fl_foto		 BLOB
+ds_estado	 VARCHAR -> Enum no Java
+
+Sequence:
+SQ_TB_VEICULO
