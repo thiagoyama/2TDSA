@@ -3,7 +3,8 @@ package br.com.fiap.tds.view;
 import javax.persistence.EntityManager;
 
 import br.com.fiap.tds.dao.ClienteDao;
-import br.com.fiap.tds.dao.impl.ClienteDaoImpl;
+import br.com.fiap.tds.dao.GenericDao;
+import br.com.fiap.tds.dao.impl.GenericDaoImpl;
 import br.com.fiap.tds.entity.Cliente;
 import br.com.fiap.tds.entity.Genero;
 import br.com.fiap.tds.exception.CommitException;
@@ -17,10 +18,15 @@ public class ClienteDaoTeste {
 		EntityManager em = EntityManagerFactorySingleton.getInstance().createEntityManager();
 		
 		//Obter o Cliente Dao
-		ClienteDao dao = new ClienteDaoImpl(em);
+		//ClienteDao dao = new ClienteDaoImpl(em);
+
+		//Definir e instanciar uma classe anônima (sem nome) que herda de GenericDaoImpl
+		
+		GenericDao<Cliente,Integer> dao = new GenericDaoImpl<Cliente,Integer>(em) {};
 		
 		//Cadastrar
 		Cliente cliente = new Cliente("Maria", "12312312", Genero.FEMININO);
+		
 		try {
 			dao.insert(cliente);
 			dao.commit();
