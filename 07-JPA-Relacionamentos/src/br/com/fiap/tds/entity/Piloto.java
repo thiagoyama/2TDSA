@@ -2,6 +2,7 @@ package br.com.fiap.tds.entity;
 
 import java.util.Calendar;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -41,10 +43,16 @@ public class Piloto {
 	@Column(name="ds_nacionalidade", length = 50)
 	private String nacionalidade;
 	
+	//Mapear o relacionamento 1:1 bidirecional
+	//mappedBy -> sempre utilizado no bidirecional
+	//mappedBy -> nome do atributo que mapeia a FK
+	@OneToOne(mappedBy = "piloto", cascade = CascadeType.PERSIST)
+	private Carro carro;
+	
 	public Piloto() {}
 
-	public Piloto(String nome, Calendar dataNascimento, TamanhoUniforme tamanhoUniforme, Float peso,
-			String nacionalidade) {
+	public Piloto(String nome, Calendar dataNascimento, TamanhoUniforme tamanhoUniforme, 
+			Float peso, String nacionalidade) {
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 		this.tamanhoUniforme = tamanhoUniforme;
@@ -62,8 +70,6 @@ public class Piloto {
 		this.nacionalidade = nacionalidade;
 	}
 
-
-
 	public int getCodigo() {
 		return codigo;
 	}
@@ -72,13 +78,7 @@ public class Piloto {
 		this.codigo = codigo;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+	
 
 	public Calendar getDataNascimento() {
 		return dataNascimento;
@@ -110,6 +110,22 @@ public class Piloto {
 
 	public void setNacionalidade(String nacionalidade) {
 		this.nacionalidade = nacionalidade;
+	}
+
+	public Carro getCarro() {
+		return carro;
+	}
+
+	public void setCarro(Carro carro) {
+		this.carro = carro;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	
 }

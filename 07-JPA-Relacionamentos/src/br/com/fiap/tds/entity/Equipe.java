@@ -37,7 +37,7 @@ public class Equipe {
 	
 	public Equipe(String nome, Pais pais, String tecnico, Integer numeroFuncionarios) {
 		this.nome = nome;
-		this.setPais(pais);
+		this.pais = pais;
 		this.tecnico = tecnico;
 		this.numeroFuncionarios = numeroFuncionarios;
 	}
@@ -45,7 +45,7 @@ public class Equipe {
 	public Equipe(int codigo, String nome, Pais pais, String tecnico, Integer numeroFuncionarios) {
 		this.codigo = codigo;
 		this.nome = nome;
-		this.setPais(pais);
+		this.pais = pais;
 		this.tecnico = tecnico;
 		this.numeroFuncionarios = numeroFuncionarios;
 	}

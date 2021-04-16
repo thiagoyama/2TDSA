@@ -40,7 +40,7 @@ public class Corrida {
 
 	public Corrida(String nome, Pais pais, Integer numeroVoltas, Double extensao, Integer espectadores) {
 		this.nome = nome;
-		this.setPais(pais);
+		this.pais = pais;
 		this.numeroVoltas = numeroVoltas;
 		this.extensao = extensao;
 		this.espectadores = espectadores;
@@ -49,7 +49,7 @@ public class Corrida {
 	public Corrida(int codigo, String nome, Pais pais, Integer numeroVoltas, Double extensao, Integer espectadores) {
 		this.codigo = codigo;
 		this.nome = nome;
-		this.setPais(pais);
+		this.pais = pais;
 		this.numeroVoltas = numeroVoltas;
 		this.extensao = extensao;
 		this.espectadores = espectadores;

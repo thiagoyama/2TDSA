@@ -1,10 +1,14 @@
 package br.com.fiap.tds.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -30,9 +34,16 @@ public class Carro {
 	@Column(name="nr_cavalos")
 	private Integer numeroCavalos;
 	
+	//Mapear o relacionamento um-para-um unidirecional
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
+	@JoinColumn(name="cd_piloto", nullable = false)
+	private Piloto piloto;
+	
 	public Carro() {}
 	
-	public Carro(Integer quantidadePneus, Double velocidadeMaxima, String marcaMotor, Integer numeroCavalos) {
+	public Carro(Integer quantidadePneus, Double velocidadeMaxima, String marcaMotor,
+				Integer numeroCavalos, Piloto piloto) {
+		this.setPiloto(piloto);
 		this.quantidadePneus = quantidadePneus;
 		this.velocidadeMaxima = velocidadeMaxima;
 		this.marcaMotor = marcaMotor;
@@ -86,6 +97,14 @@ public class Carro {
 
 	public void setNumeroCavalos(Integer numeroCavalos) {
 		this.numeroCavalos = numeroCavalos;
+	}
+
+	public Piloto getPiloto() {
+		return piloto;
+	}
+
+	public void setPiloto(Piloto piloto) {
+		this.piloto = piloto;
 	}
 	
 }
