@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -34,10 +35,15 @@ public class Carro {
 	@Column(name="nr_cavalos")
 	private Integer numeroCavalos;
 	
-	//Mapear o relacionamento um-para-um unidirecional
-	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
+	//Mapear o relacionamento um-para-um 
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
 	@JoinColumn(name="cd_piloto", nullable = false)
 	private Piloto piloto;
+	
+	//Mapear o relacionamento muitos-para-um
+	@ManyToOne
+	@JoinColumn(name="cd_equipe", nullable = false)
+	private Equipe equipe;
 	
 	public Carro() {}
 	
@@ -105,6 +111,14 @@ public class Carro {
 
 	public void setPiloto(Piloto piloto) {
 		this.piloto = piloto;
+	}
+
+	public Equipe getEquipe() {
+		return equipe;
+	}
+
+	public void setEquipe(Equipe equipe) {
+		this.equipe = equipe;
 	}
 	
 }

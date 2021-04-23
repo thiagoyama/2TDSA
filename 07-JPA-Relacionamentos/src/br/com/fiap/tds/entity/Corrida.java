@@ -1,5 +1,7 @@
 package br.com.fiap.tds.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -35,6 +38,10 @@ public class Corrida {
 	
 	@Column(name="nr_espectadores")
 	private Integer espectadores;
+	
+	//Relacionamento muitos-para-muitos bidirecional
+	@ManyToMany(mappedBy = "corridas")
+	private List<Equipe> equipes;
 	
 	public Corrida() {}
 
@@ -97,6 +104,18 @@ public class Corrida {
 
 	public void setPais(Pais pais) {
 		this.pais = pais;
+	}
+	
+	public Pais getPais() {
+		return pais;
+	}
+
+	public List<Equipe> getEquipes() {
+		return equipes;
+	}
+
+	public void setEquipes(List<Equipe> equipes) {
+		this.equipes = equipes;
 	}
 	
 }

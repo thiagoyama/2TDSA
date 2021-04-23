@@ -27,7 +27,10 @@ public class PesquisaTeste {
 			System.out.println(carro.getMarcaMotor());
 			
 			//Exibir o nome do piloto
-			//System.out.println(carro.getPiloto().getNome());
+			System.out.println(carro.getPiloto().getNome());
+			
+			//Exibir o nome da equipe
+			System.out.println(carro.getEquipe().getNome());
 		
 		} catch (EntityNotFoundException e) {
 			System.out.println(e.getMessage());

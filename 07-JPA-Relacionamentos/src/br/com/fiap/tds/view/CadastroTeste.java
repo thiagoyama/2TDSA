@@ -34,15 +34,12 @@ public class CadastroTeste {
 		//Instanciar um carro com o piloto
 		Carro carro = new Carro(12, 550d, "Ferrari", 1400, piloto);
 		
-		//Cadastrar um piloto
-		//pilotoDao.insert(piloto);
-		
 		//Cadastrar um carro
 		carroDao.insert(carro);
 		
 		//Commit
 		try {
-			pilotoDao.commit();
+			carroDao.commit();
 			System.out.println("Carro e piloto cadastrados!");
 		} catch (CommitException e) {
 			System.out.println(e.getMessage());
