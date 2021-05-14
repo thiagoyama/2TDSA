@@ -42,6 +42,11 @@ public class Pacote {
 	@JoinColumn(name="cd_transporte")
 	private Transporte transporte;
 	
+	public Pacote(String descricao, Float preco) {
+		this.descricao = descricao;
+		this.preco = preco;
+	}
+	
 	public Pacote(String descricao, Calendar dataSaida, Integer qtdDias, Float preco, Transporte transporte) {
 		super();
 		this.descricao = descricao;

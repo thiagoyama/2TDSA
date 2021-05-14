@@ -24,8 +24,8 @@ public class ClienteDAOImpl extends GenericDAOImpl<Cliente,Integer> implements C
 	@Override
 	public List<Cliente> buscarPorEstado(String estado) {
 		TypedQuery<Cliente> query = 
-				em.createQuery("from Cliente c where c.endereco.cidade.uf = :estado", Cliente.class);
-		query.setParameter("estado", estado);
+				em.createQuery("from Cliente c where c.endereco.cidade.uf = :churros",Cliente.class);
+		query.setParameter("churros", estado);
 		return query.getResultList();
 	}
 
@@ -35,6 +35,33 @@ public class ClienteDAOImpl extends GenericDAOImpl<Cliente,Integer> implements C
 				em.createQuery("select r.cliente from Reserva r where r.numeroDias = :d", Cliente.class);
 		query.setParameter("d", dias);
 		return query.getResultList();
+	}
+
+	@Override
+	public List<Cliente> buscar(String nome, String cidade) {
+		return em.createQuery("from Cliente c where c.nome like :pNome and c.endereco.cidade.nome like :pCidade", Cliente.class)
+				.setParameter("pNome", "%"+ nome + "%")
+				.setParameter("pCidade", "%" + cidade + "%")
+				.getResultList();
+	}
+
+	@Override
+	public List<Cliente> buscarPorEstados(List<String> estados) {
+		return em.createQuery("from Cliente c where c.endereco.cidade.uf in :pEstados", Cliente.class)
+				.setParameter("pEstados", estados)
+				.getResultList();
+	}
+
+	@Override
+	public List<Cliente> buscarPorNome2(String nome) {
+		return em.createQuery("from Cliente c where lower(c.nome) like lower(:pNome) order by c.nome", Cliente.class)
+				.setParameter("pNome", "%"+ nome + "%")
+				.getResultList();
+	}
+
+	@Override
+	public long contarPorEstado(String estado) {
+		return 0;
 	}
 
 }

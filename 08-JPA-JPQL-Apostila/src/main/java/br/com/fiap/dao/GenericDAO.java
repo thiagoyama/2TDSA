@@ -16,4 +16,7 @@ public interface GenericDAO<T,K> {
 	// 1 - Listar
 	List<T> listar();
 	
+	//Listar com paginação
+	List<T> listar(int primeiraPosicao, int maximoResultados);
+	
 }

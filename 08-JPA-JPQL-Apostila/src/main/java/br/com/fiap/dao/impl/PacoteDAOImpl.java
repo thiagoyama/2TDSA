@@ -1,5 +1,6 @@
 package br.com.fiap.dao.impl;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -20,6 +21,45 @@ public class PacoteDAOImpl extends GenericDAOImpl<Pacote,Integer> implements Pac
 		TypedQuery<Pacote> query = em.createQuery("from Pacote p where p.transporte = :t", Pacote.class);
 		query.setParameter("t", transporte);
 		return query.getResultList();
+	}
+
+	/**
+	 * Busca pacotes por preço menor
+	 * @param preço
+	 * @return vetor de objetos com a descrição e preço
+	 */
+	@Override
+	public List<Object[]> buscarPorPrecoMenor(float preco) {
+		return em.createQuery("select p.descricao, p.preco from Pacote p where p.preco < :pPreco" , Object[].class)
+				.setParameter("pPreco", preco)
+				.getResultList();
+	}
+
+	/**
+	 * Busca pacote por preço menor
+	 * @param preço
+	 * @return uma lista de pacotes com somente a descrição e preço preenchidos
+	 */
+	@Override
+	public List<Pacote> buscarPorPrecoMenor2(float preco) {
+		return em.createQuery("select new Pacote(p.descricao, p.preco) from Pacote p where p.preco < :pPreco", Pacote.class)
+				.setParameter("pPreco", preco)
+				.getResultList();
+	}
+
+	@Override
+	public List<String> buscarPorPrecoMenor3(float preco) {
+		return em.createQuery("select p.descricao from Pacote p where p.preco < :pPreco", String.class)
+				.setParameter("pPreco", preco)
+				.getResultList();
+	}
+
+	@Override
+	public List<Pacote> buscarPorDatas(Calendar inicio, Calendar fim) {
+		return em.createQuery("from Pacote p where p.dataSaida between :i and :f", Pacote.class)
+				.setParameter("i", inicio)
+				.setParameter("f", fim)
+				.getResultList();
 	}
 
 }
