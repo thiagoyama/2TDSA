@@ -10,14 +10,17 @@ import javax.persistence.EntityManager;
 import br.com.fiap.dao.CidadeDAO;
 import br.com.fiap.dao.ClienteDAO;
 import br.com.fiap.dao.PacoteDAO;
+import br.com.fiap.dao.ReservaDAO;
 import br.com.fiap.dao.TransporteDAO;
 import br.com.fiap.dao.impl.CidadeDAOImpl;
 import br.com.fiap.dao.impl.ClienteDAOImpl;
 import br.com.fiap.dao.impl.PacoteDAOImpl;
+import br.com.fiap.dao.impl.ReservaDAOImpl;
 import br.com.fiap.dao.impl.TransporteDAOImpl;
 import br.com.fiap.entity.Cidade;
 import br.com.fiap.entity.Cliente;
 import br.com.fiap.entity.Pacote;
+import br.com.fiap.entity.Reserva;
 import br.com.fiap.entity.Transporte;
 import br.com.fiap.singleton.EntityManagerFactorySingleton;
 import br.com.fiap.util.DataUtil;
@@ -126,6 +129,32 @@ public class Pesquisa {
 		clientes = clienteDao.buscarPorNome2("A");
 		System.out.println("Buscar cliente por parte do nome, sem case sensitive e ordenado por nome");
 		clientes.forEach(c -> System.out.println(c.getNome()));
+		
+		//Contar a quantidade de clientes por estado
+		long qtd = clienteDao.contarPorEstado("SP");
+		System.out.println("Contar cliente por estado: " + qtd);
+		
+		//Somar os preços dos pacotes por um transporte
+		transporte = transporteDao.pesquisar(3);
+		double soma = pacoteDao.somarPrecosPorTransporte(transporte);
+		System.out.println("A soma dos preços dos pacotes: " + soma);
+		
+		ReservaDAO reservaDao = new ReservaDAOImpl(em);
+		//Buscar reservas por cpf do client
+		List<Reserva> reservas = reservaDao.buscarPorCpfCliente("88892992922");
+		System.out.println("Buscar reserva por cpf do cliente");
+		reservas.forEach(r -> System.out.println(r.getCliente().getNome() + " " 
+					+ r.getPacote().getDescricao() + " " + DataUtil.formatar(r.getDataReserva())));
+		
+		//Buscar reservas por parte da descrição do pacote
+		reservas = reservaDao.buscarPorDescricaoPacote("a");
+		System.out.println("Buscar reserva por parte da descrição do pacote");
+		reservas.forEach(r -> System.out.println(r.getCliente().getNome() + " " + r.getPacote().getDescricao()));
+		
+		//Buscar pacotes por qtd de dias maior e preço menor
+		pacotes = pacoteDao.buscarPorQtdDiasMaiorEPrecoMenor(5, 5000);
+		System.out.println("Buscar pacotes por qtd de dias maior e preço menor");
+		pacotes.forEach(p -> System.out.println(p.getDescricao() + " " + p.getQtdDias() + " " + p.getPreco()));
 		
 		//Fechar
 		em.close();

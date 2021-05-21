@@ -17,10 +17,17 @@ public interface PacoteDAO extends GenericDAO<Pacote,Integer>{
 	//Buscar pacotes por preço menor, retornando somente a descrição e preço (List<Pacote>)
 	List<Pacote> buscarPorPrecoMenor2(float preco);
 	
-	//Buscar pacotos por preço menor, retornando somente a descrição (List<Strin<>)
+	//Buscar pacotes por preço menor, retornando somente a descrição (List<Strin<>)
 	List<String> buscarPorPrecoMenor3(float preco);
 	
 	// 6 - Buscar por data de saída
 	List<Pacote> buscarPorDatas(Calendar inicio, Calendar fim);
+	
+	//Somar os preços dos pacotes por um transporte
+	double somarPrecosPorTransporte(Transporte transporte);
+	
+	//Utilizando query nativa do banco oracle
+	//Buscar pacotes por qtd de dias maior e preço menor
+	List<Pacote> buscarPorQtdDiasMaiorEPrecoMenor(int qtd, float preco);
 	
 }
